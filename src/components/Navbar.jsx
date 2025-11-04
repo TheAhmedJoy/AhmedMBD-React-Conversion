@@ -7,19 +7,19 @@ export default function Navbar() {
         <header id="home">
             <nav>
                 <figure>
-                    <img id="navbar-logo" src={NavLogo} />
+                    <img id="navbar-logo" src={NavLogo} alt="Navbar Logo"/>
                 </figure>
-                <ul class="nav__link--list">
-                    <li class="nav__link--list-item">
-                        <a href="index.html" class="nav__link--anchor link__hover-effect link__hover-effect--black">Home</a>
+                <ul className="nav__link--list">
+                    <li className="nav__link--list-item">
+                        <a href="index.html" className="nav__link--anchor link__hover-effect link__hover-effect--black">Home</a>
                     </li>
-                    <li class="nav__link--list-item">
-                        <a href="movie-page.html" class="nav__link--anchor link__hover-effect link__hover-effect--black">Find your
+                    <li className="nav__link--list-item">
+                        <a href="movie-page.html" className="nav__link--anchor link__hover-effect link__hover-effect--black">Find your
                             movie</a>
                     </li>
-                    <li class="nav__link--list-item click">
-                        <a href="#" class="nav__link--anchor">
-                            <button class="nav__link--contact-button">Contact</button>
+                    <li className="nav__link--list-item click">
+                        <a href="index.html" className="nav__link--anchor">
+                            <button className="nav__link--contact-button">Contact</button>
                         </a>
                     </li>
                 </ul>

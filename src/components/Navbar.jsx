@@ -1,6 +1,7 @@
 import React from 'react'
 import '../index.css';
 import NavLogo from '../assets/AhmedMDB-Logo.png'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
     return (
@@ -11,9 +12,11 @@ export default function Navbar() {
                 </figure>
                 <ul className="nav__link--list">
                     <li className="nav__link--list-item">
-                        <a href="index.html" className="nav__link--anchor link__hover-effect link__hover-effect--black">Home</a>
+                        {/* <Link to="/" className="nav__link--anchor link__hover-effect link__hover-effect--black">Home</Link> */}
+                        <a href="/" className="nav__link--anchor link__hover-effect link__hover-effect--black">Home</a>
                     </li>
                     <li className="nav__link--list-item">
+                        {/* <Link to="/MoviesPage" className="nav__link--anchor link__hover-effect link__hover-effect--black">Find your Movie</Link> */}
                         <a href="movie-page.html" className="nav__link--anchor link__hover-effect link__hover-effect--black">Find your
                             movie</a>
                     </li>

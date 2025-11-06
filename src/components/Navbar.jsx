@@ -23,9 +23,8 @@ export default function Navbar() {
                         <Link to="/MoviesPage" className="nav__link--anchor link__hover-effect link__hover-effect--black">Find your Movie</Link>
                     </li>
                     <li className="nav__link--list-item click">
-                        <a href={null} className="nav__link--anchor">
+                        <Link to={null} className="nav__link--anchor" />
                             <button className="nav__link--contact-button" onClick={contactAlert}>Contact</button>
-                        </a>
                     </li>
                 </ul>
             </nav>

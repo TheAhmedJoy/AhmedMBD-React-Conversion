@@ -3,6 +3,7 @@ import '../index.css';
 import LandingImg from '../assets/landing-page-img.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Landing() {
     const [movieName, setMovieName] = useState("Search by Movie Name")
@@ -13,10 +14,14 @@ export default function Landing() {
 
     const enterKeySearch = event => {
         if (event.key === 'Enter') {
-            console.log("enter key pressed")
+            // <Link to='/MoviesPage' />
+            // Not working as anticipated
+            console.log("entered")
         }
 
         if (movieName.length <= 0) {
+            // <Link to='/MoviesPage' />
+            // Not working as anticipated
             alert("Please search a movie name that is not blank.")
         }
     }

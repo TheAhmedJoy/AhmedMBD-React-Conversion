@@ -3,9 +3,10 @@ import '../index.css';
 import LandingImg from '../assets/landing-page-img.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Landing() {
+    let navigate = useNavigate()
     const [movieName, setMovieName] = useState("Search by Movie Name")
 
     const movieSearchChange = event => {
@@ -16,12 +17,14 @@ export default function Landing() {
         if (event.key === 'Enter') {
             // <Link to='/MoviesPage' />
             // Not working as anticipated
+            navigate("/MoviesPage", { state: { movieName }})
             console.log("entered")
         }
 
         if (movieName.length <= 0) {
             // <Link to='/MoviesPage' />
             // Not working as anticipated
+            navigate("/MoviesPage", { state: { movieName }})
             alert("Please search a movie name that is not blank.")
         }
     }

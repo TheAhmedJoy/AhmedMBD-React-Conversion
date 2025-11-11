@@ -3,7 +3,7 @@ import '../index.css';
 import LandingImg from '../assets/landing-page-img.webp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Landing() {
     let navigate = useNavigate()
@@ -14,23 +14,21 @@ export default function Landing() {
     }
 
     const enterKeySearch = event => {
-        if (event.key === 'Enter') {
-            // <Link to='/MoviesPage' />
-            // Not working as anticipated
-            navigate("/MoviesPage", { state: { movieName }})
-            console.log("entered")
-        }
-
-        if (movieName.length <= 0) {
-            // <Link to='/MoviesPage' />
-            // Not working as anticipated
-            navigate("/MoviesPage", { state: { movieName }})
+        if (event.key === 'Enter' && movieName.length <= 0) {
             alert("Please search a movie name that is not blank.")
+        }
+        else if (event.key === 'Enter' && movieName.length > 0) {
+            navigate("/MoviesPage", { state: { movieName } })
         }
     }
 
     function clickSearch() {
-        console.log("clicked")
+        if (movieName.length <= 0) {
+            alert("Please search a movie name that is not blank.")
+        }
+        else {
+            navigate("/MoviesPage", { state: { movieName } })
+        }
     }
 
     return (

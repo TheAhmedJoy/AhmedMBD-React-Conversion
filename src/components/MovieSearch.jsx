@@ -1,20 +1,19 @@
 import React from 'react'
+import '../movie-page-styles.css'
 import { useState, useEffect } from 'react'
 import MovieDisplay from './MovieDisplay'
 
 export default function MovieSearch({ movieName }) {
 
     const [updatedMovieName, setMovieName] = useState(movieName)
-    const [movieSearchData, setMovieSearchData] = useState()
+    const [movieSearchData, setMovieSearchData] = useState([])
 
     useEffect(() => {
-        console.log("from use effect")
         fetchMoviesData(updatedMovieName)
     }, [])
 
     const movieSearchChange = event => {
         setMovieName(event.target.value)
-        console.log(updatedMovieName)
     }
 
     const enterKeySearch = event => {
@@ -32,15 +31,19 @@ export default function MovieSearch({ movieName }) {
 
             try {
                 const movieData = await (await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=c33e1424&s=${updatedMovieName}&y=`)).json()
-                setMovieSearchData(movieData.Search)
+
+                if (movieData.Response === "True") {
+                    setMovieSearchData(movieData.Search)
+                }
+                else if (movieData.Response === "False") {
+                    alert(`${movieData.Error} Please try your search again.`)
+                }
             }
             catch (error) {
-                console.log(error)
                 alert("Error fetching movie data. Please try again.")
             }
         }
     }
-
 
     return (
         <>
@@ -63,6 +66,10 @@ export default function MovieSearch({ movieName }) {
                         <input type="number" min="1878" max="2025" className="year-filter__input" placeholder="e.g. 2025" />
                     </div>
                 </div>
+                {movieSearchData.map((movie) => (
+                    <MovieDisplay movieName={movie.Title} movieYear={movie.Year}
+                        moviePoster={movie.Poster} movieIMDBid={movie.imdbID} key={movie.imdbID} />
+                ))}
             </section>
         </>
     )

@@ -1,10 +1,8 @@
 import React from 'react'
+import '../movie-page-styles.css'
+import MoviePosterMissing from '../assets/movie-poster-missing.jpg'
 
-export default function MovieDisplay({ movieSearchData }) {
-  console.log("From movie display")
-
-  console.log(movieSearchData)
-  console.log("Attempting map")
+export default function MovieDisplay({ movieName, movieYear, moviePoster, movieIMDBid }) {
 
   return (
     <>
@@ -14,11 +12,11 @@ export default function MovieDisplay({ movieSearchData }) {
             <div className="movie-list__item">
               <div className="movie-card">
                 <div className="movie-card__container">
-                  <img id="movie-poster" src="" alt="Movie Poster" />
-                  <p><b>Movie name: </b> movie name</p>
-                  <p><b>Year:</b> movie year</p>
-                  <p><b>IMDb:</b> <a id="movie-imbd" href="https://website.website"
-                    target="_blank">website.website</a></p>
+                  <img id="movie-poster" src={(moviePoster !== "N/A" ? moviePoster : MoviePosterMissing)} alt="Movie Poster" />
+                  <p><b>Movie name: </b>{movieName}</p>
+                  <p><b>Year:</b> {movieYear}</p>
+                  <p><b>IMDb:</b> <a id="movie-imbd" href={`https://www.imdb.com/title/${movieIMDBid}`}
+                    target="_blank">https://www.imdb.com/title/{movieIMDBid}</a></p>
                 </div>
               </div>
             </div>

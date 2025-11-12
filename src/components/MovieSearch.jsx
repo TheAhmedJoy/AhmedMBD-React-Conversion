@@ -6,11 +6,24 @@ import MovieDisplay from './MovieDisplay'
 export default function MovieSearch({ movieName }) {
 
     const [updatedMovieName, setMovieName] = useState(movieName)
-    const [individualMovieData, setIndividualMovieData] = useState([])
+    const [fetchedMovieData, setFetchedMovieData] = useState([])
+    const [isSortByYearAlpha, setIsSortByYearAlpha] = useState(true)
+
+    console.log(isSortByYearAlpha)
 
     useEffect(() => {
         fetchMoviesData(updatedMovieName)
     }, [])
+
+    useEffect(() => {
+        if (isSortByYearAlpha) {
+            fetchedMovieData.sort((a, b) => a.Title.localeCompare(b.Title))
+        }
+        else if (!isSortByYearAlpha) {
+            fetchedMovieData.sort((a, b) => a.Year.localeCompare(b.Year))
+        }
+
+    }, [isSortByYearAlpha, fetchedMovieData])
 
     const movieSearchChange = event => {
         setMovieName(event.target.value)
@@ -20,14 +33,13 @@ export default function MovieSearch({ movieName }) {
         if (event.key === 'Enter' && updatedMovieName.length <= 0) {
             alert("Please search a movie name that is not blank.")
         }
-        else if (event.key === 'Enter' && updatedMovieName.length > 0) {
+        else if (event.key === 'Enter') {
             fetchMoviesData(updatedMovieName)
         }
     }
 
     async function fetchMoviesData(updatedMovieName) {
-        let tempMovieFetchedData = []
-        let tempIndividualMovieData = []
+        let tempFetchedMovieData = []
 
         if (updatedMovieName !== undefined || updatedMovieName != null) {
             updatedMovieName = updatedMovieName.replaceAll(" ", "+")
@@ -36,7 +48,7 @@ export default function MovieSearch({ movieName }) {
                 const movieData = await (await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=c33e1424&s=${updatedMovieName}&y=`)).json()
 
                 if (movieData.Response === "True") {
-                    tempMovieFetchedData = movieData.Search
+                    tempFetchedMovieData = movieData.Search
                 }
                 else if (movieData.Response === "False") {
                     alert(`${movieData.Error} Please try your search again.`)
@@ -47,11 +59,7 @@ export default function MovieSearch({ movieName }) {
             }
         }
 
-        for (let i = 0; i < 6; i++) {
-            tempIndividualMovieData.push(tempMovieFetchedData[i])
-        }
-
-        setIndividualMovieData(tempIndividualMovieData)
+        setFetchedMovieData(tempFetchedMovieData.slice(0, 6))
     }
 
     return (
@@ -68,19 +76,29 @@ export default function MovieSearch({ movieName }) {
                         <span>Search results for </span>
                         <span className="red" id="movie-name-filter">{updatedMovieName}</span>
                     </h2>
-                    <div className="year-filter">
+                    <div className="movie-filter">
                         <h2>
-                            <span>Search by Year</span>
+                            <span>Sort by</span>
                         </h2>
-                        <input type="number" min="1878" max="2025" className="year-filter__input" placeholder="e.g. 2025" />
+                        <select className="movie-filter__input" value={isSortByYearAlpha}
+                            onChange={(event) => setIsSortByYearAlpha(event.target.value)}>
+                            <option value={false}>Year </option>
+                            <option value={true}>Alphabetical </option>
+                        </select>
                     </div>
                 </div>
 
                 <div className="movie-container">
                     {
-                        individualMovieData.map((movie) => (
-                            <MovieDisplay movie={movie} key={movie.imdbID} />
-                        ))
+                        (fetchedMovieData.length === 0 || fetchedMovieData[0] === undefined) ?
+                            (
+                                <h1 className='red'>Please try your search again.</h1>
+                            ) :
+                            (
+                                fetchedMovieData.map((movie) => (
+                                    <MovieDisplay movieInfo={movie} key={movie.imdbID} />
+                                ))
+                            )
                     }
                 </div>
             </section>

@@ -2,7 +2,7 @@ import React from 'react'
 import '../movie-page-styles.css'
 import MoviePosterMissing from '../assets/movie-poster-missing.jpg'
 
-export default function MovieDisplay({ movie }) {
+export default function MovieDisplay({ movieInfo }) {
 
   return (
     <>
@@ -11,11 +11,11 @@ export default function MovieDisplay({ movie }) {
           <div className="movie-list__item">
             <div className="movie-card">
               <div className="movie-card__container">
-                <img id="movie-poster" src={(movie.Poster !== "N/A" ? movie.Poster : MoviePosterMissing)} alt="Movie Poster" />
-                <p><b>Movie name: </b>{movie.Title}</p>
-                <p><b>Year:</b> {movie.Year}</p>
-                <p><b>IMDb:</b> <a id="movie-imbd" href={`https://www.imdb.com/title/${movie.imdbID}`}
-                  target="_blank">https://www.imdb.com/title/{movie.imdbID}</a></p>
+                <img id="movie-poster" src={(movieInfo.Poster !== "N/A" ? movieInfo.Poster : MoviePosterMissing)} alt="Movie Poster" />
+                <p><b>Movie name: </b>{movieInfo.Title}</p>
+                <p><b>Year:</b> {movieInfo.Year}</p>
+                <p><b>IMDb:</b> <a id="movie-imbd" href={`https://www.imdb.com/title/${movieInfo.imdbID}`}
+                  target="_blank">https://www.imdb.com/title/{movieInfo.imdbID}</a></p>
               </div>
             </div>
           </div>

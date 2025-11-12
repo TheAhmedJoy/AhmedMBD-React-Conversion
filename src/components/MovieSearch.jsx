@@ -7,23 +7,11 @@ export default function MovieSearch({ movieName }) {
 
     const [updatedMovieName, setMovieName] = useState(movieName)
     const [fetchedMovieData, setFetchedMovieData] = useState([])
-    const [isSortByYearAlpha, setIsSortByYearAlpha] = useState(true)
-
-    console.log(isSortByYearAlpha)
+    const [yearFilter, setYearFilter] = useState()
 
     useEffect(() => {
         fetchMoviesData(updatedMovieName)
     }, [])
-
-    useEffect(() => {
-        if (isSortByYearAlpha) {
-            fetchedMovieData.sort((a, b) => a.Title.localeCompare(b.Title))
-        }
-        else if (!isSortByYearAlpha) {
-            fetchedMovieData.sort((a, b) => a.Year.localeCompare(b.Year))
-        }
-
-    }, [isSortByYearAlpha, fetchedMovieData])
 
     const movieSearchChange = event => {
         setMovieName(event.target.value)
@@ -62,6 +50,27 @@ export default function MovieSearch({ movieName }) {
         setFetchedMovieData(tempFetchedMovieData.slice(0, 6))
     }
 
+    function renderMovieDisplay() {
+        if (fetchedMovieData.length === 0 || fetchedMovieData[0] === undefined) {
+            return (
+                <h1 className='red'>Please try your search again.</h1>
+            )
+        }
+
+        if (yearFilter === "newToOld") {
+            return fetchedMovieData
+                .sort((a, b) => b.Year.toString(``).slice(0, 4) - a.Year.toString(``).slice(0, 4))
+                .map((movie) => <MovieDisplay movieInfo={movie} key={movie.imdbID} />)
+        }
+        else if (yearFilter === "oldToNew") {
+            return fetchedMovieData
+                .sort((a, b) => a.Year.toString(``).slice(0, 4) - b.Year.toString(``).slice(0, 4))
+                .map((movie) => <MovieDisplay movieInfo={movie} key={movie.imdbID} />)
+        }
+
+        return fetchedMovieData.map((movie) => <MovieDisplay movieInfo={movie} key={movie.imdbID} />)
+    }
+
     return (
         <>
             <div className="navbar__input--wrapper">
@@ -77,28 +86,18 @@ export default function MovieSearch({ movieName }) {
                         <span className="red" id="movie-name-filter">{updatedMovieName}</span>
                     </h2>
                     <div className="movie-filter">
-                        <h2>
-                            <span>Sort by</span>
-                        </h2>
-                        <select className="movie-filter__input" value={isSortByYearAlpha}
-                            onChange={(event) => setIsSortByYearAlpha(event.target.value)}>
-                            <option value={false}>Year </option>
-                            <option value={true}>Alphabetical </option>
+                        <select className="movie-filter__option" defaultValue=""
+                            onChange={(event) => setYearFilter(event.target.value)}>
+                            <option value="" disabled>Filter by Year</option>
+                            <option value="newToOld">Newest to Oldest</option>
+                            <option value="oldToNew">Oldest to Newest</option>
                         </select>
                     </div>
                 </div>
 
                 <div className="movie-container">
                     {
-                        (fetchedMovieData.length === 0 || fetchedMovieData[0] === undefined) ?
-                            (
-                                <h1 className='red'>Please try your search again.</h1>
-                            ) :
-                            (
-                                fetchedMovieData.map((movie) => (
-                                    <MovieDisplay movieInfo={movie} key={movie.imdbID} />
-                                ))
-                            )
+                        renderMovieDisplay()
                     }
                 </div>
             </section>

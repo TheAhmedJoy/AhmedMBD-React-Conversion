@@ -6,7 +6,7 @@ import MovieDisplay from './MovieDisplay'
 export default function MovieSearch({ movieName }) {
 
     const [updatedMovieName, setMovieName] = useState(movieName)
-    const [movieSearchData, setMovieSearchData] = useState([])
+    const [individualMovieData, setIndividualMovieData] = useState([])
 
     useEffect(() => {
         fetchMoviesData(updatedMovieName)
@@ -26,6 +26,9 @@ export default function MovieSearch({ movieName }) {
     }
 
     async function fetchMoviesData(updatedMovieName) {
+        let tempMovieFetchedData = []
+        let tempIndividualMovieData = []
+
         if (updatedMovieName !== undefined || updatedMovieName != null) {
             updatedMovieName = updatedMovieName.replaceAll(" ", "+")
 
@@ -33,7 +36,7 @@ export default function MovieSearch({ movieName }) {
                 const movieData = await (await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=c33e1424&s=${updatedMovieName}&y=`)).json()
 
                 if (movieData.Response === "True") {
-                    setMovieSearchData(movieData.Search)
+                    tempMovieFetchedData = movieData.Search
                 }
                 else if (movieData.Response === "False") {
                     alert(`${movieData.Error} Please try your search again.`)
@@ -43,6 +46,12 @@ export default function MovieSearch({ movieName }) {
                 alert("Error fetching movie data. Please try again.")
             }
         }
+
+        for (let i = 0; i < 6; i++) {
+            tempIndividualMovieData.push(tempMovieFetchedData[i])
+        }
+
+        setIndividualMovieData(tempIndividualMovieData)
     }
 
     return (
@@ -66,10 +75,14 @@ export default function MovieSearch({ movieName }) {
                         <input type="number" min="1878" max="2025" className="year-filter__input" placeholder="e.g. 2025" />
                     </div>
                 </div>
-                {movieSearchData.map((movie) => (
-                    <MovieDisplay movieName={movie.Title} movieYear={movie.Year}
-                        moviePoster={movie.Poster} movieIMDBid={movie.imdbID} key={movie.imdbID} />
-                ))}
+
+                <div className="movie-container">
+                    {
+                        individualMovieData.map((movie) => (
+                            <MovieDisplay movie={movie} key={movie.imdbID} />
+                        ))
+                    }
+                </div>
             </section>
         </>
     )

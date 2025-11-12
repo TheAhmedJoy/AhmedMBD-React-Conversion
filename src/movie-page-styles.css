@@ -138,12 +138,12 @@ button {
     padding: 24px;
 }
 
-.year-filter {
+.movie-filter {
     display: flex;
     flex-direction: column;
 }
 
-.year-filter__input {
+.movie-filter__option {
     background-color: white;
     font-size: 24px;
     margin-top: 8px;

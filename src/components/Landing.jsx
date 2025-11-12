@@ -40,7 +40,7 @@ export default function Landing() {
                 </div>
                 <div className="landing-page__input--wrapper">
                     <input className="movie-search" id="movie-name"
-                        value={movieName} onChange={movieSearchChange} onKeyDown={enterKeySearch} />
+                        placeholder="Search by Movie Name" onChange={movieSearchChange} onKeyDown={enterKeySearch} />
                     <button className="movie-search-button" id="movie-name" onClick={clickSearch}>
                         <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" />
                     </button>

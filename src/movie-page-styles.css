@@ -130,6 +130,7 @@ button {
 }
 
 /* MOVIE AREA */
+
 .search-filter {
     display: flex;
     justify-content: space-around;
@@ -151,6 +152,8 @@ button {
 }
 
 .movie-container {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 auto;
     padding: 0;
     width: 100%;

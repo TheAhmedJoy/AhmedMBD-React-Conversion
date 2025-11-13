@@ -155,6 +155,7 @@ button {
     display: flex;
     flex-wrap: wrap;
     margin: 0 auto;
+    justify-content: center;
     padding: 0;
     width: 100%;
     max-width: 1200px;
@@ -174,6 +175,8 @@ button {
     transition: 0.3s;
     border-radius: 10px;
     line-height: 2;
+    width: 350px;
+    height: 625px;
 }
 
 .movie-card__container {
@@ -181,4 +184,8 @@ button {
     justify-content: center;
     flex-direction: column;
     padding: 2px 16px;
+}
+
+#movie-poster {
+    cursor: pointer;
 }

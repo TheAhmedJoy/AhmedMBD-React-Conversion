@@ -33,7 +33,7 @@ export default function MovieSearch({ movieName }) {
             updatedMovieName = updatedMovieName.replaceAll(" ", "+")
 
             try {
-                const movieData = await (await fetch(`https://www.omdbapi.com/?i=tt3896198&apikey=c33e1424&s=${updatedMovieName}&y=`)).json()
+                const movieData = await (await fetch(`https://www.omdbapi.com/?apikey=c33e1424&s=${updatedMovieName}&plot=short`)).json()
 
                 if (movieData.Response === "True") {
                     tempFetchedMovieData = movieData.Search

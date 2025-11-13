@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/AhmedMBD-React-Conversion/static/css/main.d23930ee.css",
-    "main.js": "/AhmedMBD-React-Conversion/static/js/main.00f3d040.js",
+    "main.css": "/AhmedMBD-React-Conversion/static/css/main.3711e35b.css",
+    "main.js": "/AhmedMBD-React-Conversion/static/js/main.598ff5bb.js",
     "static/js/453.b9218a19.chunk.js": "/AhmedMBD-React-Conversion/static/js/453.b9218a19.chunk.js",
     "static/media/landing-page-img.webp": "/AhmedMBD-React-Conversion/static/media/landing-page-img.73d999517e3ecb445043.webp",
     "static/media/movie-poster-missing.jpg": "/AhmedMBD-React-Conversion/static/media/movie-poster-missing.a616a9018643d9f46281.jpg",
     "static/media/AhmedMDB-Logo.png": "/AhmedMBD-React-Conversion/static/media/AhmedMDB-Logo.82c7ebb46b4bae991d57.png",
     "index.html": "/AhmedMBD-React-Conversion/index.html",
-    "main.d23930ee.css.map": "/AhmedMBD-React-Conversion/static/css/main.d23930ee.css.map",
-    "main.00f3d040.js.map": "/AhmedMBD-React-Conversion/static/js/main.00f3d040.js.map",
+    "main.3711e35b.css.map": "/AhmedMBD-React-Conversion/static/css/main.3711e35b.css.map",
+    "main.598ff5bb.js.map": "/AhmedMBD-React-Conversion/static/js/main.598ff5bb.js.map",
     "453.b9218a19.chunk.js.map": "/AhmedMBD-React-Conversion/static/js/453.b9218a19.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d23930ee.css",
-    "static/js/main.00f3d040.js"
+    "static/css/main.3711e35b.css",
+    "static/js/main.598ff5bb.js"
   ]
 }
